@@ -9,19 +9,18 @@ var selfie = {
     image.setAttribute('src', selfie);
     image.classList.add("visible");
 
-    view.pauseVideo();
+    videoView.pauseVideo();
 
     // selfie.persistSelfie();
     window.sessionStorage.setItem('selfie', image);
   },
   // retake a selfie
   retakeSelfie: function() {
-    console.log('here'),
-    view.pauseVideo();
-  }
+    videoView.pauseVideo();
+  },
 };
 
-var view = {
+var videoView = {
   // turn on webcam
   startVideo: function() {
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
@@ -62,16 +61,29 @@ var view = {
   }
 };
 
+var sytlesView = {
+  styles: ['/assets/styles/caravaggio.jpg', '/assets/styles/charley_harper.jpg', '/assets/styles/daydream-alphonse-mucha.jpg', '/assets/styles/escher.jpg', '/assets/styles/matisse.jpg', '/assets/styles/michelangelo.jpg', '/assets/styles/Picasso.jpg'];
+  stylesUl: document.createElement('ul');
+
+  document.getElementById('ul').appendChild(ul);
+
+  styles.forEach(function (style) {
+    var li = document.createElement('li');
+    ul.appendChild(li);
+
+    li.innerHTML += style;
+  }),
+};
 
 
 var handlers = {
   // turn on the webcam
   startCamera: function() {
-    view.startVideo() 
+    videoView.startVideo() 
   },
   // turn off the webcam
   stopCamera: function() {
-    view.stopVideo()
+    videoView.stopVideo()
   },
   // process the selfie from a temporary canvas
   createSelfie() {
@@ -92,8 +104,10 @@ var handlers = {
       return hidden_canvas.toDataURL('image/png');
     }
   },
+  // submit your selfie and choices
+
 };
 
 
-view.setupEventListeners();
-
+videoView.setupEventListeners();
+sytlesView.displayStyles();
