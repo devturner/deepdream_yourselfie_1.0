@@ -30,7 +30,8 @@ var videoView = {
         video.srcObject = stream;
         localstream = stream;
         // show buttons on taking, retaking, and submitting (hide before using webcam)
-        
+        hideUi.toggleButton('start');
+        hideUi.toggleButton('stop');
       });
     } else {
       displayErrorMessage("Your browser does not support the webcam control, please try a modern version of Chrome");
@@ -42,6 +43,9 @@ var videoView = {
     video.src = '';
     localstream.getTracks()[0].stop();
     // hide buttons on taking, retaking, and submitting
+
+    hideUi.toggleButton('stop');
+    hideUi.toggleButton('start');
   },
   // pause the video while taking/ displaying photo
   pauseVideo: function() {
@@ -51,7 +55,7 @@ var videoView = {
       video.play();
     }
   },
-
+  // press enter to take a photo
   setupEventListeners: function () {
     document.addEventListener('keydown', function(event) {
       if (event.keyCode == 13) {
@@ -110,6 +114,48 @@ var handlers = {
 
 };
 
+// gotta hide things when they are not needed
+var hideUi = {
+
+  toggleButton: function(buttonId) { 
+    var x = document.getElementById(buttonId)
+    console.log(x.style.display)
+    if (x.style.display == 'none') {
+        x.style.display = 'inline-block';
+    } else {
+        x.style.display = 'none';
+    }
+    console.log(x.style.display)
+  }, 
+
+  // toggleStop: function() { 
+  //   var x = document.getElementById('stop')
+  //   if (x.style.display === "none") {
+  //       x.style.display = "block";
+  //   } else {
+  //       x.style.display = 'none';
+  //   }
+  // },   
+  
+  hideTake: function() { 
+    var x = document.getElementsByClassName('takePhoto')
+  }, 
+
+  hideRetake: function() { 
+    var x = document.getElementsByClassName('deletePhoto')
+  }, 
+
+  hideSubmit: function() { 
+    var x = document.getElementsByClassName('submitPhoto')
+  }, 
+
+  hideStyles: function() { 
+    var x = document.getElementsByClassName('table')
+  }, 
+
+}
+
 
 videoView.setupEventListeners();
 sytlesView.displayStyles();
+

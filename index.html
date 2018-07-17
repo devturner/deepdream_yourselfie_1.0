@@ -14,17 +14,17 @@
 <div class="container">
 	
 	<div class="photobooth">
-		<button class="start-camera" onclick="handlers.startCamera()">Enable Camera</button>
-		<button class="stop-camera" onclick="handlers.stopCamera()">Disable Camera</button>
+		<button id="start" onclick="handlers.startCamera()">Enable Camera</button>
+		<button id="stop" style="display: none;" onclick="handlers.stopCamera()">Disable Camera</button>
 		<center><video id="camera-stream" width="640" height="480" autoplay></video></center>
 		<img id="selfie">
 		
 		<p id="error-message"> </p>
 
 		<div id="controles">
-			<button class="deletePhoto" onclick="selfie.retakeSelfie()">retake</button>
-			<button class="takePhoto" onclick="selfie.takeSelfie()">take</button>
-			<button class="submitPhoto" onclick="handlers.startCamera()">submit</button>
+			<button id="deletePhoto" onclick="selfie.retakeSelfie()">retake</button>
+			<button id="takePhoto" onclick="selfie.takeSelfie()">take</button>
+			<button id="submitPhoto" onclick="handlers.startCamera()">submit</button>
 		</div>
 
 		<canvas id="canvas"></canvas>
@@ -40,7 +40,7 @@
 
 </div>
 
-<script type="text/javascript" src="assets/js/script.js"></script>
+<script type="text/javascript" src="assets/js/script.js" async></script>
 
 
 </body>
