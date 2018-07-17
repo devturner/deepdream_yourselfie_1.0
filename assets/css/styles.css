@@ -10,3 +10,33 @@ img#selfie{
 canvas{
     display: none;
 }
+
+ul#ul {
+    width: 900px;
+    vertical-align: middle;
+    list-style: none;
+	}
+	ul#ul li {
+		display: inline;
+		padding-right: 5px;
+		padding-top: 5px;
+	}
+/*.style {
+	height: 200px;
+
+}*/
+
+img#style {
+	height: 200px;
+	width: 200px;
+}
+
+.container_styles {
+	height: 220px;
+}
+
+.table {
+	display: table;
+	margin: 0px;
+}
+

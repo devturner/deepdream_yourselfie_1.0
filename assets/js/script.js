@@ -60,19 +60,21 @@ var videoView = {
     }, true);
   }
 };
-
+// <a href="#"><img src="assets/styles/caravaggio.jpg" />
 var sytlesView = {
-  styles: ['/assets/styles/caravaggio.jpg', '/assets/styles/charley_harper.jpg', '/assets/styles/daydream-alphonse-mucha.jpg', '/assets/styles/escher.jpg', '/assets/styles/matisse.jpg', '/assets/styles/michelangelo.jpg', '/assets/styles/Picasso.jpg'];
-  stylesUl: document.createElement('ul');
+  
+  styles: ['<img id="style" id="style" id="style" src="assets/styles/caravaggio.jpg" />', '<img id="style" src="assets/styles/charley_harper.jpg" />', '<img id="style" src="assets/styles/daydream-alphonse-mucha.jpg" />', '<img id="style" src="assets/styles/escher.jpg" />', '<img id="style" src="assets/styles/matisse.jpg" />', '<img id="style" src="assets/styles/Picasso.jpg" />', '<img id="style" src="assets/styles/michelangelo.jpg" />', '<img id="style" id="style" id="style" src="assets/styles/starheadboy.jpg" />'],
 
-  document.getElementById('ul').appendChild(ul);
+  displayStyles: function () { 
+    var str = '<ul>'
+    this.styles.forEach(function(style) {
+      str += '<li class="style">' + style + '</li>';
+    }); 
+      
+    str += '</ul>';
+    document.getElementById('ul').innerHTML = str;
+  }
 
-  styles.forEach(function (style) {
-    var li = document.createElement('li');
-    ul.appendChild(li);
-
-    li.innerHTML += style;
-  }),
 };
 
 
