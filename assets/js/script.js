@@ -3,7 +3,16 @@ var image = document.getElementById('selfie');
 
 var localstream;
 
+
+
+
+
+
 var selfie = {
+  // persistSelfie: function() {
+  //   window.sessionStorage.setItem('selfie', image);
+  // },
+
   // take a seflie
   takeSelfie: function() {
     var selfie = handlers.createSelfie();
@@ -12,6 +21,8 @@ var selfie = {
     image.classList.add("visible");
 
     view.pauseVideo();
+    // selfie.persistSelfie();
+    window.sessionStorage.setItem('selfie', image);
   },
   // retake a selfie
   retakeSelfie: function() {
