@@ -46,7 +46,6 @@ var view = {
     } else {
       displayErrorMessage("Your browser does not support the webcam control, please try a modern version of Chrome");
     }
-
   },
   // turn off the webcam
   stopVideo: function() {
@@ -63,6 +62,14 @@ var view = {
       video.play();
     }
   },
+
+  setupEventListeners: function () {
+    document.addEventListener('keydown', function(event) {
+      if (event.keyCode == 13) {
+        selfie.takeSelfie();
+      }
+    }, true);
+  }
 };
 
 
@@ -97,4 +104,6 @@ var handlers = {
   },
 };
 
+
+view.setupEventListeners();
 
