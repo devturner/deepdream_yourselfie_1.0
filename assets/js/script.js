@@ -1,6 +1,6 @@
 var video = document.getElementById('camera-stream');
 var image = document.getElementById('selfie');
-var selfieButton = document.querySelector('#take-photo')
+
 var localstream;
 
 var selfie = {
@@ -13,10 +13,11 @@ var selfie = {
 
     view.pauseVideo();
   },
-  // deelte a selfie
-  // deleteSelfie:{
-
-  // },
+  // retake a selfie
+  retakeSelfie: function() {
+    console.log('here'),
+    view.pauseVideo();
+  }
 };
 
 var view = {
@@ -45,7 +46,11 @@ var view = {
   },
   // pause the video while taking/ displaying photo
   pauseVideo: function() {
-    video.pause();
+    if (!video.paused) {
+      video.pause();
+    } else {
+      video.play();
+    }
   },
 };
 

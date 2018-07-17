@@ -17,16 +17,14 @@
 		<button class="start-camera" onclick="handlers.startCamera()">Enable Camera</button>
 		<button class="stop-camera" onclick="handlers.stopCamera()">Disable Camera</button>
 		<center><video id="camera-stream" width="640" height="480" autoplay></video></center>
-		<a href="#" id="take-photo" title="Take Photo">take photo</a>
 		<img id="selfie">
 		
 		<p id="error-message"> </p>
 
 		<div id="controles">
-			<button class="deletePhoto" onclick="handlers.startCamera()">retake</button>
+			<button class="deletePhoto" onclick="selfie.retakeSelfie()">retake</button>
 			<button class="takePhoto" onclick="selfie.takeSelfie()">take</button>
 			<button class="submitPhoto" onclick="handlers.startCamera()">submit</button>
-
 		</div>
 
 		<canvas id="canvas"></canvas>
