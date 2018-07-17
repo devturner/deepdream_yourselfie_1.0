@@ -13,11 +13,17 @@ var selfie = {
 
     // selfie.persistSelfie();
     window.sessionStorage.setItem('selfie', image);
+    hideUi.toggleButton('deletePhoto');
+    hideUi.toggleButton('submitPhoto');
   },
   // retake a selfie
   retakeSelfie: function() {
     videoView.pauseVideo();
+    hideUi.toggleButton('deletePhoto');
+    hideUi.toggleButton('submitPhoto');
   },
+
+  // submit this selfie to the api
 };
 
 var videoView = {
@@ -32,6 +38,8 @@ var videoView = {
         // show buttons on taking, retaking, and submitting (hide before using webcam)
         hideUi.toggleButton('start');
         hideUi.toggleButton('stop');
+        hideUi.toggleButton('takePhoto');
+
       });
     } else {
       displayErrorMessage("Your browser does not support the webcam control, please try a modern version of Chrome");
@@ -46,6 +54,7 @@ var videoView = {
 
     hideUi.toggleButton('stop');
     hideUi.toggleButton('start');
+    hideUi.toggleButton('takePhoto');
   },
   // pause the video while taking/ displaying photo
   pauseVideo: function() {
@@ -108,6 +117,7 @@ var handlers = {
       
       // canvas image to dataURL for image source
       return hidden_canvas.toDataURL('image/png');
+
     }
   },
   // submit your selfie and choices
@@ -127,30 +137,33 @@ var hideUi = {
     }
     console.log(x.style.display)
   }, 
-
-  // toggleStop: function() { 
-  //   var x = document.getElementById('stop')
-  //   if (x.style.display === "none") {
-  //       x.style.display = "block";
+  
+  
+  // hideTake: function() { 
+  //   var x = document.getElementsByClassName('takePhoto')
+  //   if (x.style.display == 'none') {
+  //       x.style.display = 'inline-block';
   //   } else {
   //       x.style.display = 'none';
   //   }
-  // },   
-  
-  hideTake: function() { 
-    var x = document.getElementsByClassName('takePhoto')
-  }, 
+  // }, 
 
-  hideRetake: function() { 
-    var x = document.getElementsByClassName('deletePhoto')
-  }, 
+  // hideRetake: function() { 
+  //   var x = document.getElementsByClassName('deletePhoto')
+  //   if (x.style.display == 'none') {
+  //       x.style.display = 'inline-block';
+  //   } else {
+  //       x.style.display = 'none';
+  //   }
+  // }, 
 
-  hideSubmit: function() { 
-    var x = document.getElementsByClassName('submitPhoto')
-  }, 
+  // hideSubmit: function() { 
+  //   var x = document.getElementsByClassName('submitPhoto')
+  // }, 
 
-  hideStyles: function() { 
-    var x = document.getElementsByClassName('table')
+  unhideStyles: function() { 
+    var x = document.getElementById('table')
+    x.style.display = 'table'
   }, 
 
 }

@@ -22,20 +22,20 @@
 		<p id="error-message"> </p>
 
 		<div id="controles">
-			<button id="deletePhoto" onclick="selfie.retakeSelfie()">retake</button>
-			<button id="takePhoto" onclick="selfie.takeSelfie()">take</button>
-			<button id="submitPhoto" onclick="handlers.startCamera()">submit</button>
+			<button id="deletePhoto" style="display: none;" onclick="selfie.retakeSelfie()">retake</button>
+			<button id="takePhoto" style="display: none;" onclick="selfie.takeSelfie()">take</button>
+			<button id="submitPhoto" style="display: none;" onclick="handlers.startCamera()">submit</button>
 		</div>
-
+		<div class="container_styles">
+			<div id="table" style="display: none;">
+				<ul id="ul">
+		    	</ul>
+		    </div>
+		</div>
 		<canvas id="canvas"></canvas>
 	</div>
 
-<div class="container_styles">
-	<div class="table">
-		<ul id="ul">
-    	</ul>
-    </div>
-</div>
+
 
 
 </div>
