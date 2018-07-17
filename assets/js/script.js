@@ -1,19 +1,8 @@
 var video = document.getElementById('camera-stream');
 var image = document.getElementById('selfie');
 
-var localstream;
-
-
-
-
-
-
 var selfie = {
-  // persistSelfie: function() {
-  //   window.sessionStorage.setItem('selfie', image);
-  // },
 
-  // take a seflie
   takeSelfie: function() {
     var selfie = handlers.createSelfie();
     
@@ -21,6 +10,7 @@ var selfie = {
     image.classList.add("visible");
 
     view.pauseVideo();
+
     // selfie.persistSelfie();
     window.sessionStorage.setItem('selfie', image);
   },
@@ -40,7 +30,7 @@ var view = {
       }).then(function(stream) {
         video.srcObject = stream;
         localstream = stream;
-        // show buttons on taking, retaking, and submitting
+        // show buttons on taking, retaking, and submitting (hide before using webcam)
         
       });
     } else {
