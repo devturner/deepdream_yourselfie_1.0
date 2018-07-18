@@ -188,8 +188,8 @@ var hideUi = {
 
 var deepDream = {
   sendSelfie: function () {
-    var fs = require('fs');
-    var request = require('request');
+    // var fs = require('fs');
+    // var request = require('request');
     request.post({
       url: 'https://api.deepai.org/api/neural-style',
       headers: {
