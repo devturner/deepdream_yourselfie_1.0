@@ -11,6 +11,8 @@ var selfie = {
 
     videoView.pauseVideo();
 
+    console.log(selfie)
+
     // selfie.persistSelfie();
     window.sessionStorage.setItem('selfie', image);
     hideUi.toggleButton('deletePhoto');
@@ -109,9 +111,9 @@ var sytlesView = {
     if (event.target) {
       alert("clicked " + event.target.src);
       picked = event.target.src;
-    }
+    } deepDream.sendSelfie();
   });
-  },
+  }, 
 
 };
 
@@ -143,7 +145,8 @@ var handlers = {
       // canvas image to dataURL for image source
       return hidden_canvas.toDataURL('image/png');
     }
-  },
+  }
+
     // submit your selfie and choices
 
 };
@@ -179,6 +182,32 @@ var hideUi = {
     var x = document.getElementById('table')
     x.style.display = 'table'
   }, 
+
+}
+
+
+var deepDream = {
+  sendSelfie: function () {
+    // var fs = require('fs');
+    // var request = require('request');
+    request.post({
+      url: 'https://api.deepai.org/api/neural-style',
+      headers: {
+          'Api-Key': '96c94bdc-77e0-4371-8a0d-8538d4c2693d'
+      },
+      formData: {
+          'style': fs.createReadStream('picked'),
+          'content': fs.createReadStream('image'),
+      }
+    }, function callback(err, httpResponse, body) {
+      if (err) {
+          console.error('request failed:', err);
+          return;
+      }
+      var response = JSON.parse(body);
+      console.log(response);
+    });
+  }
 
 }
 
