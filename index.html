@@ -16,7 +16,7 @@
 	<div class="photobooth">
 		<button id="start" onclick="handlers.startCamera()">Enable Camera</button>
 		<button id="stop" style="display: none;" onclick="handlers.stopCamera()">Disable Camera</button>
-		<center><video id="camera-stream" width="640" height="480" autoplay></video></center>
+		<center><video id="camera-stream" style="display: none;" width="640" height="480" autoplay></video></center>
 		<img id="selfie">
 		
 		<p id="error-message"> </p>
@@ -24,7 +24,7 @@
 		<div id="controles">
 			<button id="deletePhoto" style="display: none;" onclick="selfie.retakeSelfie()">retake</button>
 			<button id="takePhoto" style="display: none;" onclick="selfie.takeSelfie()">take</button>
-			<button id="submitPhoto" style="display: none;" onclick="handlers.startCamera()">submit</button>
+			<button id="submitPhoto" style="display: none;" onclick="selfie.submitSelfie()">submit</button>
 		</div>
 		<div class="container_styles">
 			<div id="table" style="display: none;">
