@@ -27,7 +27,13 @@ var selfie = {
 
   // save this selfie for the api, turn off camera, and show selectable styles, hide buttons
   submitSelfie: function() {
-
+    videoView.stopVideo();
+    hideUi.toggleButton('start');
+    hideUi.toggleButton('stop');
+    hideUi.cameraOff();
+    hideUi.unhideStyles();
+    hideUi.toggleButton('stop');
+    sytlesView.setupEventListeners();
   }
 
 };
@@ -84,7 +90,8 @@ var videoView = {
 // <a href="#"><img src="assets/styles/caravaggio.jpg" />
 var sytlesView = {
   
-  styles: ['<img id="style" id="style" id="style" src="assets/styles/caravaggio.jpg" />', '<img id="style" src="assets/styles/charley_harper.jpg" />', '<img id="style" src="assets/styles/daydream-alphonse-mucha.jpg" />', '<img id="style" src="assets/styles/escher.jpg" />', '<img id="style" src="assets/styles/matisse.jpg" />', '<img id="style" src="assets/styles/Picasso.jpg" />', '<img id="style" src="assets/styles/michelangelo.jpg" />', '<img id="style" id="style" id="style" src="assets/styles/starheadboy.jpg" />'],
+  styles: ['<img id="style" src="assets/styles/caravaggio.jpg" />', '<img id="style" src="assets/styles/charley_harper.jpg" />', '<img id="style" src="assets/styles/daydream-alphonse-mucha.jpg" />', '<img id="style" src="assets/styles/escher.jpg" />', '<img id="style" src="assets/styles/matisse.jpg" />', '<img id="style" src="assets/styles/Picasso.jpg" />', '<img id="style" src="assets/styles/michelangelo.jpg" />', '<img id="style" id="style" id="style" src="assets/styles/starheadboy.jpg" />'],
+  picked: '',
 
   displayStyles: function () { 
     var str = '<ul>'
@@ -94,7 +101,17 @@ var sytlesView = {
       
     str += '</ul>';
     document.getElementById('ul').innerHTML = str;
-  }
+  },
+
+  setupEventListeners: function() {
+      document.getElementById("table").addEventListener("click", function(event) {
+    // console.log('here')
+    if (event.target) {
+      alert("clicked " + event.target.src);
+      picked = event.target.src;
+    }
+  });
+  },
 
 };
 
@@ -125,10 +142,9 @@ var handlers = {
       
       // canvas image to dataURL for image source
       return hidden_canvas.toDataURL('image/png');
-
     }
   },
-  // submit your selfie and choices
+    // submit your selfie and choices
 
 };
 
