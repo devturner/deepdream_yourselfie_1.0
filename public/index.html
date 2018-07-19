@@ -39,7 +39,13 @@
 		    	</ul>
 		    	
 		    </div>
-		    <button id="submit" style="display: none;" onclick="handlers.submit()">submit</button>
+		    <!-- <input type="submit" id="submit" style="display: none;" onclick="handlers.submit()"> -->
+
+		<form method="POST" action="/choices/submit">
+  			<input id="picked_style" name="picked_style">
+  			<input id="taken_selfie" name="taken_selfie">
+		    <input type="submit" id="submit" style="display: none;">
+		</form>
 		</div>
 		<canvas id="canvas"></canvas>
 	</div>
