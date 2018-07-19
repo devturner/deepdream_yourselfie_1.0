@@ -1,5 +1,6 @@
 var video = document.getElementById('camera-stream');
 var image = document.getElementById('selfie');
+var picked = '';
 
 var selfie = {
 
@@ -10,8 +11,6 @@ var selfie = {
     image.classList.add("visible");
 
     videoView.pauseVideo();
-
-    console.log(selfie)
 
     // selfie.persistSelfie();
     window.sessionStorage.setItem('selfie', image);
@@ -91,10 +90,9 @@ var videoView = {
 };
 // <a href="#"><img src="assets/styles/caravaggio.jpg" />
 var sytlesView = {
-  
   styles: ['<img id="style" src="assets/styles/caravaggio.jpg" />', '<img id="style" src="assets/styles/charley_harper.jpg" />', '<img id="style" src="assets/styles/daydream-alphonse-mucha.jpg" />', '<img id="style" src="assets/styles/escher.jpg" />', '<img id="style" src="assets/styles/matisse.jpg" />', '<img id="style" src="assets/styles/Picasso.jpg" />', '<img id="style" src="assets/styles/michelangelo.jpg" />', '<img id="style" id="style" id="style" src="assets/styles/starheadboy.jpg" />'],
-  picked: '',
 
+// add styles to the UL
   displayStyles: function () { 
     var str = '<ul>'
     this.styles.forEach(function(style) {
@@ -105,17 +103,35 @@ var sytlesView = {
     document.getElementById('ul').innerHTML = str;
   },
 
+  // displayChoiceAndSelfie: function() {
+  //   var x = document.createElement("IMG");
+  //   x.setAttribute("src", "assets/styles/caravaggio.jpg");
+  //   // x.setAttribute("id", "pickedStyle");
+  //   x.setAttribute("height", "300px");
+  //   x.setAttribute("width", "400px");
+  //   x.setAttribute("alt", "picked style");
+  //   document.body.appendChild(x);
+    
+  //   hideUi.toggleButton("table");
+  //   hideUi.toggleButton("selfie");
+  //   hideUi.toggleButton("picked");
+  // },
+// set the users style in var picked
   setupEventListeners: function() {
       document.getElementById("table").addEventListener("click", function(event) {
-    // console.log('here')
-    if (event.target) {
-      alert("clicked " + event.target.src);
-      picked = event.target.src;
-    } deepDream.sendSelfie();
-  });
-  }, 
+      // console.log('here')
+      if (event.target) {
+        // alert("clicked " + event.target.src);
+        picked = event.target.src;
+        // sytlesView.displayChoiceAndSelfie();
+        hideUi.unhideButton();
+      };
+    } ) 
+  } 
 
 };
+
+
 
 
 var handlers = {
@@ -143,17 +159,20 @@ var handlers = {
       context.drawImage(video, 0, 0, width, height)
       
       // canvas image to dataURL for image source
-      return hidden_canvas.toDataURL('image/png');
+      return hidden_canvas.toDataURL('image/jpg');
     }
-  }
+  },
 
     // submit your selfie and choices
 
+    submit() {
+      
+    }
 };
 
 // gotta hide things when they are not needed
 var hideUi = {
-  toggleButton: function(buttonId) { 
+  toggleButton: function(buttonId) {
     var x = document.getElementById(buttonId)
     if (x.style.display == 'none') {
         x.style.display = 'inline-block';
@@ -183,33 +202,14 @@ var hideUi = {
     x.style.display = 'table'
   }, 
 
-}
-
-
-var deepDream = {
-  sendSelfie: function () {
-    // var fs = require('fs');
-    // var request = require('request');
-    request.post({
-      url: 'https://api.deepai.org/api/neural-style',
-      headers: {
-          'Api-Key': '96c94bdc-77e0-4371-8a0d-8538d4c2693d'
-      },
-      formData: {
-          'style': fs.createReadStream('picked'),
-          'content': fs.createReadStream('image'),
-      }
-    }, function callback(err, httpResponse, body) {
-      if (err) {
-          console.error('request failed:', err);
-          return;
-      }
-      var response = JSON.parse(body);
-      console.log(response);
-    });
+  unhideButton: function() {
+    var x = document.getElementById('submit')
+    x.style.display = 'block';
   }
-
 }
+
+
+
 
 
 videoView.setupEventListeners();
