@@ -1,8 +1,19 @@
-img#selfie{
+img#selfie {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 400px;
+    /*height: 240px;*/
+    z-index: 10;
+    display: none;
+}
+
+img#picked {
+    position: absolute;
+    top: 0;
+    left: 0;
+    /*width: 400px;*/
+    /*height: 240px;*/
     z-index: 10;
     display: none;
 }
@@ -33,6 +44,11 @@ img#style {
 }
 
 #table {
+	display: table;
+	margin: 0px;
+}
+
+#review {
 	display: table;
 	margin: 0px;
 }
