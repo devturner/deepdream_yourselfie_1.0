@@ -8,9 +8,10 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "ba64": "^3.0.9",
     "express": "^4.16.3",
     "request": "^2.87.0",
-    "requirejs": "^2.3.5"
+    "body-parser": "*"
   },
   "repository": {
     "type": "git",
