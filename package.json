@@ -9,9 +9,10 @@
   },
   "dependencies": {
     "ba64": "^3.0.9",
+    "body-parser": "*",
     "express": "^4.16.3",
-    "request": "^2.87.0",
-    "body-parser": "*"
+    "jimp": "^0.2.28",
+    "request": "^2.87.0"
   },
   "repository": {
     "type": "git",
