@@ -1,17 +1,8 @@
-
-// server.js
-
-// init project
 var express = require('express');
 var bodyParser = require('body-parser');
 var path = require('path');
 var ba64 = require("ba64");
 var fs = require("fs");
-var request = require('request');
-var jimp = require('jimp');
-
-
-
 
 var app = express(); 
 
@@ -27,36 +18,21 @@ app.get('/', function(request, response) {
 });
 
 
-app.post('/choices/submit', function(request, response){
-	// console.log(request.body.picked_style)
-	var picked_style = request.body.picked_style;
+app.post('/result', function(request, response){
 	var selfie = request.body.taken_selfie;
 	var data_url = "data:image/jpg;base64" + selfie;
-	// var data_url = "data:image/jpeg;base64, request.body.taken_selfie";
-
-  // console.log(data_url),
-
-	// data_url = ba64.getBa64Img(data_url),
-	ba64.writeImage("myimage", data_url, function(err){
-  		if (err) throw err;
-		  console.log("Image saved successfully");
-
-		  deepDream.sendSelfie();
-		})
-});
-
-// JIMP to turn photo black and white. 
-
-
-var deepDream = {
-  sendSelfie: function() {
+  
+  ba64.writeImage("myimage", data_url, function(err){
+  	if (err) throw err;
+	  console.log("Image saved successfully");
+  
+    var request = require("request");
     request.post({
       url: 'https://api.deepai.org/api/deepdream',
       headers: {
           'Api-Key': '96c94bdc-77e0-4371-8a0d-8538d4c2693d'
       },
       formData: {
-          // 'content': fs.createReadStream('public/assets/styles/daydream-alphonse-mucha.jpg'),
           'content': fs.createReadStream('myimage.jpg'),
       }
     }, function callback(err, httpResponse, body) {
@@ -64,24 +40,13 @@ var deepDream = {
           console.error('request failed:', err);
           return;
       }
-      var returnedImageUrl = JSON.parse(body);
-      returnedImageUrl = JSON.stringify(returnedImageUrl);
-      // console.log(response);
-      // console.log(response.output_url);
-      // var returnedImageUrl = response
-      console.log(returnedImageUrl);
-
-
+      var reply = JSON.parse(body);
+      var redirect = reply.output_url;
+      console.log(redirect);
+      response.send(redirect);
     });
-  }
-
-}
-
-      app.get('/', function(request, response){
-        console.log("happened");                
-        response.json(returnedImageUrl)
-      })
-
+  })
+});
 
 
 // listen for requests :)
