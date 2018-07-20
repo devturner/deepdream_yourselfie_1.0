@@ -18,32 +18,18 @@
 		<button id="stop" style="display: none;" onclick="handlers.stopCamera()">Disable Camera</button>
 		<center><video id="camera-stream" style="display: none;" width="640" height="480" autoplay></video></center>
 			<img id="selfie" style="display: none;">
-<!-- 		<div id="container_styles">
-			<ul id="uL1">
-			    <li><img id="selfie" style="display: none;"></li>
-				<li><img id="picked" style="display: none;"></li>
-			</ul>
-		</div>	 -->
+
 		<p id="error-message"> </p>
 
 		<div id="controles">
 			<button id="deletePhoto" style="display: none;" onclick="selfie.retakeSelfie()">retake</button>
 			<button id="takePhoto" style="display: none;" onclick="selfie.takeSelfie()">take</button>
-			<button id="submitPhoto" style="display: none;" onclick="selfie.submitSelfie()">submit</button>
-			<img id="selfie" style="display: none;">
-			<img id="picked" style="display: none;">
+			<!-- <button id="submitPhoto" style="display: none;" onclick="selfie.submitSelfie()">submit</button> -->
 		</div>
-		<div class="container_styles">
-			<div id="table" style="display: none;">
-				<ul id="ul">
-		    	</ul>
-		    	
-		    </div>
-		    <!-- <input type="submit" id="submit" style="display: none;" onclick="handlers.submit()"> -->
+
 
 		<form method="POST" action="/choices/submit">
-  			<input id="picked_style" name="picked_style">
-  			<input id="taken_selfie" name="taken_selfie">
+  			<input type= "hidden" id="taken_selfie" name="taken_selfie">
 		    <input type="submit" id="submit" style="display: none;">
 		</form>
 		</div>

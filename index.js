@@ -28,8 +28,6 @@ app.get('/', function(request, response) {
 
 
 app.post('/choices/submit', function(request, response){
-	// console.log(request.body.picked_style)
-	var picked_style = request.body.picked_style;
 	var selfie = request.body.taken_selfie;
 	var data_url = "data:image/jpg;base64" + selfie;
 	// var data_url = "data:image/jpeg;base64, request.body.taken_selfie";
@@ -56,7 +54,6 @@ var deepDream = {
           'Api-Key': '96c94bdc-77e0-4371-8a0d-8538d4c2693d'
       },
       formData: {
-          // 'content': fs.createReadStream('public/assets/styles/daydream-alphonse-mucha.jpg'),
           'content': fs.createReadStream('myimage.jpg'),
       }
     }, function callback(err, httpResponse, body) {
@@ -64,24 +61,22 @@ var deepDream = {
           console.error('request failed:', err);
           return;
       }
-      var returnedImageUrl = JSON.parse(body);
-      returnedImageUrl = JSON.stringify(returnedImageUrl);
-      // console.log(response);
-      // console.log(response.output_url);
-      // var returnedImageUrl = response
-      console.log(returnedImageUrl);
-
-
+      var response = JSON.parse(body);
+      var redirect = response.output_url;
+      result.sendResult(redirect);
     });
   }
 
 }
 
-      app.get('/', function(request, response){
-        console.log("happened");                
-        response.json(returnedImageUrl)
-      })
-
+var result = {
+  sendResult: function(result_url) {
+    app.get('/', function(request, response){
+      console.log("happened");                
+      response.json(result_url)
+    })
+  }
+}
 
 
 // listen for requests :)

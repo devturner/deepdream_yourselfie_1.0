@@ -16,28 +16,28 @@ var selfie = {
     // selfie.persistSelfie();
     window.sessionStorage.setItem('selfie', image);
     hideUi.toggleButton('deletePhoto');
-    hideUi.toggleButton('submitPhoto');
+    hideUi.toggleButton('submit');
     hideUi.toggleButton('takePhoto');
       },
   // retake a selfie
   retakeSelfie: function() {
     videoView.pauseVideo();
     hideUi.toggleButton('deletePhoto');
-    hideUi.toggleButton('submitPhoto');
+    hideUi.toggleButton('submit');
     hideUi.toggleButton('takePhoto');
   },
 
   // save this selfie for the api, turn off camera, and show selectable styles, hide buttons
   submitSelfie: function() {
+    console.log('here');
     videoView.stopVideo();
     hideUi.toggleButton('start');
-    hideUi.toggleButton('stop');
-    hideUi.cameraOff();
-    hideUi.unhideStyles();
-    hideUi.toggleButton('stop');
-    sytlesView.setupEventListeners();
-  }
+    // hideUi.toggleButton('stop');
+    // hideUi.cameraOff();
+    // hideUi.toggleButton('stop');
+    
 
+  }
 };
 
 var videoView = {
@@ -69,6 +69,7 @@ var videoView = {
 
     hideUi.toggleButton('stop');
     hideUi.toggleButton('start');
+    hideUi.toggleButton('submit');
     hideUi.cameraOff();
     hideUi.toggleVideo();
   },
@@ -79,47 +80,8 @@ var videoView = {
     } else {
       video.play();
     }
-  },
-  // press enter to take a photo
-  setupEventListeners: function () {
-    document.addEventListener('keydown', function(event) {
-      if (event.keyCode == 13) {
-        selfie.takeSelfie();
-      }
-    }, true);
   }
 };
-// <a href="#"><img src="assets/styles/caravaggio.jpg" />
-var sytlesView = {
-  styles: ['<img id="style" src="assets/styles/caravaggio.jpg" />', '<img id="style" src="assets/styles/charley_harper.jpg" />', '<img id="style" src="assets/styles/daydream-alphonse-mucha.jpg" />', '<img id="style" src="assets/styles/escher.jpg" />', '<img id="style" src="assets/styles/matisse.jpg" />', '<img id="style" src="assets/styles/Picasso.jpg" />', '<img id="style" src="assets/styles/michelangelo.jpg" />', '<img id="style" id="style" id="style" src="assets/styles/starheadboy.jpg" />'],
-
-// add styles to the UL
-  displayStyles: function () { 
-    var str = '<ul>'
-    this.styles.forEach(function(style) {
-      str += '<li class="style">' + style + '</li>';
-    }); 
-      
-    str += '</ul>';
-    document.getElementById('ul').innerHTML = str;
-  },
-
-// set the users style in var picked
-  setupEventListeners: function() {
-      document.getElementById("table").addEventListener("click", function(event) {
-      // console.log('here')
-      if (event.target) {
-        // alert("clicked " + event.target.src);
-        picked = event.target.src;
-        // sytlesView.displayChoiceAndSelfie();
-        handlers.fillSubmitForm();
-      };
-    } )
-  } 
-
-};
-
-
 
 
 var handlers = {
@@ -130,6 +92,25 @@ var handlers = {
   // turn off the webcam
   stopCamera: function() {
     videoView.stopVideo()
+  },
+
+  // press enter to take a photo
+  setupEventListeners: function () {
+    document.addEventListener('click', function(event) {
+      var elementClicked = event.target;
+
+      if(elementClicked.id === 'submit') {
+        handlers.fillSubmitForm();
+        selfie.submitSelfie();
+      }
+    });
+
+
+    document.addEventListener('keydown', function(event) {
+      if (event.keyCode == 13) {
+        selfie.takeSelfie();
+      }
+    }, true);
   },
   // process the selfie from a temporary canvas
   createSelfie() {
@@ -154,11 +135,7 @@ var handlers = {
     // submit your selfie and choices
 
     fillSubmitForm() {
-      console.log(picked)
-      document.getElementById('picked_style').value = (picked),
-      document.getElementById('taken_selfie').value = (image.src),
-      
-      hideUi.unhideButton();
+      document.getElementById('taken_selfie').value = (image.src)
     }
 };
 
@@ -175,7 +152,7 @@ var hideUi = {
   cameraOff: function() {
     var x = document.getElementById('takePhoto')
     var y = document.getElementById('deletePhoto')
-    var z = document.getElementById('submitPhoto')
+    var z = document.getElementById('submit')
     x.style.display = 'none';
     y.style.display = 'none';
     z.style.display = 'none';
@@ -187,23 +164,9 @@ var hideUi = {
     } else {
         x.style.display = 'none';
     }
-  },
-
-  unhideStyles: function() { 
-    var x = document.getElementById('table')
-    x.style.display = 'table'
   }, 
-
-  unhideButton: function() {
-    var x = document.getElementById('submit')
-    x.style.display = 'block';
-  }
 }
 
+handlers.setupEventListeners();
 
-
-
-
-videoView.setupEventListeners();
-sytlesView.displayStyles();
 
