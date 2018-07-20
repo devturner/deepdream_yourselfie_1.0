@@ -7,8 +7,8 @@ var bodyParser = require('body-parser');
 var path = require('path');
 var ba64 = require("ba64");
 var fs = require("fs");
-var request = require('request');
-var jimp = require('jimp');
+var request = require("request")
+var Promise = require('node-promise').Promise;
 
 
 
@@ -27,20 +27,15 @@ app.get('/', function(request, response) {
 });
 
 
-app.post('/choices/submit', function(request, response){
+app.post('/submit', function(request, response){
 	var selfie = request.body.taken_selfie;
 	var data_url = "data:image/jpg;base64" + selfie;
-	// var data_url = "data:image/jpeg;base64, request.body.taken_selfie";
-
-  // console.log(data_url),
-
-	// data_url = ba64.getBa64Img(data_url),
-	ba64.writeImage("myimage", data_url, function(err){
-  		if (err) throw err;
-		  console.log("Image saved successfully");
-
-		  deepDream.sendSelfie();
-		})
+  
+  ba64.writeImage("myimage", data_url, function(err){
+  	if (err) throw err;
+	  console.log("Image saved successfully");
+    deepDream.sendSelfie();
+	})
 });
 
 // JIMP to turn photo black and white. 
@@ -63,20 +58,26 @@ var deepDream = {
       }
       var response = JSON.parse(body);
       var redirect = response.output_url;
-      result.sendResult(redirect);
+      console.log(redirect)
+
     });
   }
-
 }
 
-var result = {
-  sendResult: function(result_url) {
-    app.get('/', function(request, response){
-      console.log("happened");                
-      response.json(result_url)
-    })
-  }
-}
+// app.post('/submit', function(request, response){
+//       console.log("happened");                
+//       response.send(result_url)
+//     })
+
+
+// var result = {
+//   sendResult: function(result_url) {
+//     app.get('/submit', function(request, response){
+//       console.log("happened");                
+//       response.send(result_url)
+//     })
+//   }
+// }
 
 
 // listen for requests :)
