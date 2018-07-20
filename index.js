@@ -56,22 +56,31 @@ var deepDream = {
           'Api-Key': '96c94bdc-77e0-4371-8a0d-8538d4c2693d'
       },
       formData: {
-          'content': fs.createReadStream('public/assets/styles/daydream-alphonse-mucha.jpg'),
-          // 'content': fs.createReadStream('myimage.jpg'),
+          // 'content': fs.createReadStream('public/assets/styles/daydream-alphonse-mucha.jpg'),
+          'content': fs.createReadStream('myimage.jpg'),
       }
     }, function callback(err, httpResponse, body) {
       if (err) {
           console.error('request failed:', err);
           return;
       }
-      var response = JSON.parse(body);
-      console.log(response);
+      var returnedImageUrl = JSON.parse(body);
+      returnedImageUrl = JSON.stringify(returnedImageUrl);
+      // console.log(response);
+      // console.log(response.output_url);
+      // var returnedImageUrl = response
+      console.log(returnedImageUrl);
+
+
     });
   }
 
 }
 
-
+      app.get('/', function(request, response){
+        console.log("happened");                
+        response.json(returnedImageUrl)
+      })
 
 
 
