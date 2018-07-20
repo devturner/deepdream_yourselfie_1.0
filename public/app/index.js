@@ -1,1 +1,0 @@
-// const selfie = require('./takeSelfie')

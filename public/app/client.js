@@ -1,6 +1,7 @@
 var video = document.getElementById('camera-stream');
 var image = document.getElementById('selfie');
-var picked = '';
+
+var pickedSelfie = '';
 
 var selfie = {
 
@@ -17,7 +18,7 @@ var selfie = {
     hideUi.toggleButton('deletePhoto');
     hideUi.toggleButton('submitPhoto');
     hideUi.toggleButton('takePhoto');
-  },
+      },
   // retake a selfie
   retakeSelfie: function() {
     videoView.pauseVideo();
@@ -103,19 +104,6 @@ var sytlesView = {
     document.getElementById('ul').innerHTML = str;
   },
 
-  // displayChoiceAndSelfie: function() {
-  //   var x = document.createElement("IMG");
-  //   x.setAttribute("src", "assets/styles/caravaggio.jpg");
-  //   // x.setAttribute("id", "pickedStyle");
-  //   x.setAttribute("height", "300px");
-  //   x.setAttribute("width", "400px");
-  //   x.setAttribute("alt", "picked style");
-  //   document.body.appendChild(x);
-    
-  //   hideUi.toggleButton("table");
-  //   hideUi.toggleButton("selfie");
-  //   hideUi.toggleButton("picked");
-  // },
 // set the users style in var picked
   setupEventListeners: function() {
       document.getElementById("table").addEventListener("click", function(event) {
@@ -124,9 +112,9 @@ var sytlesView = {
         // alert("clicked " + event.target.src);
         picked = event.target.src;
         // sytlesView.displayChoiceAndSelfie();
-        hideUi.unhideButton();
+        handlers.fillSubmitForm();
       };
-    } ) 
+    } )
   } 
 
 };
@@ -165,8 +153,12 @@ var handlers = {
 
     // submit your selfie and choices
 
-    submit() {
+    fillSubmitForm() {
+      console.log(picked)
+      document.getElementById('picked_style').value = (picked),
+      document.getElementById('taken_selfie').value = (image.src),
       
+      hideUi.unhideButton();
     }
 };
 
