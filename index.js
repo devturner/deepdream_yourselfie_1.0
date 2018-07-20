@@ -1,17 +1,8 @@
-
-// server.js
-
-// init project
 var express = require('express');
 var bodyParser = require('body-parser');
 var path = require('path');
 var ba64 = require("ba64");
 var fs = require("fs");
-var request = require("request")
-var Promise = require('node-promise').Promise;
-
-
-
 
 var app = express(); 
 
@@ -27,22 +18,15 @@ app.get('/', function(request, response) {
 });
 
 
-app.post('/submit', function(request, response){
+app.post('/result', function(request, response){
 	var selfie = request.body.taken_selfie;
 	var data_url = "data:image/jpg;base64" + selfie;
   
   ba64.writeImage("myimage", data_url, function(err){
   	if (err) throw err;
 	  console.log("Image saved successfully");
-    deepDream.sendSelfie();
-	})
-});
-
-// JIMP to turn photo black and white. 
-
-
-var deepDream = {
-  sendSelfie: function() {
+  
+    var request = require("request");
     request.post({
       url: 'https://api.deepai.org/api/deepdream',
       headers: {
@@ -56,28 +40,13 @@ var deepDream = {
           console.error('request failed:', err);
           return;
       }
-      var response = JSON.parse(body);
-      var redirect = response.output_url;
-      console.log(redirect)
-
+      var reply = JSON.parse(body);
+      var redirect = reply.output_url;
+      console.log(redirect);
+      response.send(redirect);
     });
-  }
-}
-
-// app.post('/submit', function(request, response){
-//       console.log("happened");                
-//       response.send(result_url)
-//     })
-
-
-// var result = {
-//   sendResult: function(result_url) {
-//     app.get('/submit', function(request, response){
-//       console.log("happened");                
-//       response.send(result_url)
-//     })
-//   }
-// }
+  })
+});
 
 
 // listen for requests :)

@@ -7,18 +7,14 @@ var selfie = {
 
   takeSelfie: function() {
     var selfie = handlers.createSelfie();
-    
     image.setAttribute('src', selfie);
     image.classList.add("visible");
-
     videoView.pauseVideo();
 
-    // selfie.persistSelfie();
-    window.sessionStorage.setItem('selfie', image);
     hideUi.toggleButton('deletePhoto');
     hideUi.toggleButton('submit');
     hideUi.toggleButton('takePhoto');
-      },
+  },
   // retake a selfie
   retakeSelfie: function() {
     videoView.pauseVideo();
@@ -32,11 +28,6 @@ var selfie = {
     console.log('here');
     videoView.stopVideo();
     hideUi.toggleButton('start');
-    // hideUi.toggleButton('stop');
-    // hideUi.cameraOff();
-    // hideUi.toggleButton('stop');
-    
-
   }
 };
 
