@@ -25,7 +25,7 @@ var selfie = {
 
   // save this selfie for the api, turn off camera, and show selectable styles, hide buttons
   submitSelfie: function() {
-    console.log('here');
+    window.sessionStorage.setItem('selfie', image.src);
     videoView.stopVideo();
     hideUi.toggleButton('start');
   }
@@ -96,13 +96,13 @@ var handlers = {
       }
     });
 
-
     document.addEventListener('keydown', function(event) {
       if (event.keyCode == 13) {
         selfie.takeSelfie();
       }
     }, true);
   },
+
   // process the selfie from a temporary canvas
   createSelfie() {
     var hidden_canvas = document.getElementById('canvas');
@@ -124,7 +124,6 @@ var handlers = {
   },
 
     // submit your selfie and choices
-
     fillSubmitForm() {
       document.getElementById('taken_selfie').value = (image.src)
     }

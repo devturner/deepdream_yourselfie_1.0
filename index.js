@@ -48,8 +48,7 @@ app.post('/', function(request, response){
       var reply = JSON.parse(body);
       var redirect = reply.output_url;
       var str = '<img id="deepSelfie" src="' + redirect + '">';
-      console.log(str);
-      response.render('index', {result: str});
+      response.render('results', {result: str});
     });
   })
 });
