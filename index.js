@@ -4,7 +4,12 @@ var path = require('path');
 var ba64 = require("ba64");
 var fs = require("fs");
 
-var app = express(); 
+var app = express();
+
+//view engine
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, '/views'))
 
 app.use(bodyParser.json({limit: '5mb'}));
 app.use(bodyParser.urlencoded({limit: '5mb', extended: true}));
@@ -13,12 +18,12 @@ app.use(bodyParser.urlencoded({limit: '5mb', extended: true}));
 app.use(express.static('public'));
 
 // http://expressjs.com/en/starter/basic-routing.html
-app.get('/', function(request, response) {
-  response.sendFile(__dirname + '/public/index.html');
+app.get('*', function(request, response) {
+  response.render('index', {result: ''});
 });
 
 
-app.post('/result', function(request, response){
+app.post('/', function(request, response){
 	var selfie = request.body.taken_selfie;
 	var data_url = "data:image/jpg;base64" + selfie;
   
@@ -42,8 +47,8 @@ app.post('/result', function(request, response){
       }
       var reply = JSON.parse(body);
       var redirect = reply.output_url;
-      console.log(redirect);
-      response.send(redirect);
+      var str = '<img id="deepSelfie" src="' + redirect + '">';
+      response.render('results', {result: str});
     });
   })
 });

@@ -3,13 +3,13 @@
 <head>
 	
 	<meta charset="utf-8">
-	<title>Deep dream yourselfie</title>
+	<title>deep dream yourselfie</title>
 
 	<link rel="stylesheet" type="text/css" href="assets/css/styles.css">
 
 </head>
 <body>
-	<h2>Deep dream yourselfie</h2>
+	<h2>deep dream yourselfie</h2>
 
 <div class="container">
 	
@@ -18,9 +18,7 @@
 		<button id="stop" style="display: none;" onclick="handlers.stopCamera()">Disable Camera</button>
 		<center><video id="camera-stream" style="display: none;" width="640" height="480" autoplay></video></center>
 			<img id="selfie" style="display: none;">
-
-		<p id="error-message"> </p>
-
+			
 		<div id="controles">
 			<button id="deletePhoto" style="display: none;" onclick="selfie.retakeSelfie()">retake</button>
 			<button id="takePhoto" style="display: none;" onclick="selfie.takeSelfie()">take</button>
@@ -28,7 +26,7 @@
 		</div>
 
 
-		<form method="POST" action="/result">
+		<form method="POST" action="/">
   			<input type= "hidden" id="taken_selfie" name="taken_selfie">
 		    <input type="submit" id="submit" style="display: none;">
 		</form>
