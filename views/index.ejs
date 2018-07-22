@@ -1,10 +1,8 @@
-<!DOCTYPE	html>
-
 <head>
 	
 	<meta charset="utf-8">
 	<title>deep dream yourselfie</title>
-
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="assets/css/styles.css">
 
 </head>
@@ -14,21 +12,24 @@
 <div class="container">
 	
 	<div class="photobooth">
-		<button id="start" onclick="handlers.startCamera()">Enable Camera</button>
-		<button id="stop" style="display: none;" onclick="handlers.stopCamera()">Disable Camera</button>
+		<button id="start" onclick="handlers.startCamera()"><i class="material-icons">
+power_settings_new </i></button>
+		<button id="stop" style="display: none;" onclick="handlers.stopCamera()"><i class="material-icons">
+power_settings_new </i></button>
 		<center><video id="camera-stream" style="display: none;" width="640" height="480" autoplay></video></center>
 			<img id="selfie" style="display: none;">
 			
 		<div id="controles">
-			<button id="deletePhoto" style="display: none;" onclick="selfie.retakeSelfie()">retake</button>
-			<button id="takePhoto" style="display: none;" onclick="selfie.takeSelfie()">take</button>
+			<button id="deletePhoto" style="display: none;" onclick="selfie.retakeSelfie()"><i class="material-icons">fast_rewind</i></button>
+			<button id="takePhoto" style="display: none;" onclick="selfie.takeSelfie()"><i class="material-icons">camera_alt</i></button>
 			<!-- <button id="submitPhoto" style="display: none;" onclick="selfie.submitSelfie()">submit</button> -->
 		</div>
 
 
 		<form method="POST" action="/">
   			<input type= "hidden" id="taken_selfie" name="taken_selfie">
-		    <input type="submit" id="submit" style="display: none;">
+		    <!-- <input type="submit" id="submit" style="display: none;"> -->
+		    <button type="submit" id="submit" formmethod="post" style="display: none;"><i class="material-icons">&#xe01f;</i></button>
 		</form>
 		</div>
 		<canvas id="canvas"></canvas>
