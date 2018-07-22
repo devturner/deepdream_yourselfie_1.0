@@ -57,6 +57,6 @@ app.post('/results', function(request, response){
 
 
 // listen for requests :)
-app.listen(6700, function () {
-  console.log('Your app is listening on port 6700...');
+app.listen(8080, function () {
+  console.log('Your app is listening on port 8080...');
 });
