@@ -1,3 +1,110 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html{
+    background-color: #ededed;
+    font:normal 16px/1.5 sans-serif;
+}
+
+body {
+    margin: 0 auto;
+    font-family: "Helvetica", "Arial", sans-serif;
+    line-height: 1.5;
+}
+
+header,
+main {
+  margin: 0 auto;
+  max-width: 50em;
+}
+
+
+
+#header{
+    background-color: #263d36;
+    background-image: url("../images/header1.png");
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    line-height: 1.2;
+    padding:6vw 2em;
+    text-align: center;
+}
+
+
+h1 {
+    font-family: 'IBM Plex Mono', monospace;
+    /*margin-top: 1em;*/
+    padding-top: 120px;
+    color: #ededed;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    font-size: 62PX;
+    letter-spacing: .7px;
+    word-spacing: 4px;
+}
+
+
+
+
+.container .photobooth{
+    padding-top: 1em;
+    max-width: 40em;
+    margin: auto;
+    
+}
+
+.container .photobooth{
+    -webkit-align-content: center;
+    align-content: center;
+}
+
+
+#start,
+#stop,
+#redo {
+    background-color: #4e86e0;
+    border: none;
+    color: #ededed;
+    padding: 15px 32px;
+    text-align: center;
+    text-transform: lowercase;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 24px;
+    /*margin: 4px 4px;*/
+    cursor: pointer;
+    align-content: center;
+}
+
+#deletePhoto,
+#takePhoto,
+#submit  {
+    background-color: #4e86e0;
+    border: none;
+    color: white;
+    padding: 4px 12px;
+    text-align: right;
+    text-transform: lowercase;
+    text-decoration: none;
+    font-size: 12px;
+    margin: 4px 2px;
+    cursor: pointer;
+    vertical-align:middle;  
+    display: inline-block;
+    line-height: 18px
+    
+}
+
+#submit {
+    float: right;
+    clear: both;
+    display: inline-block;
+}
+
+
 img#selfie {
     position: absolute;
     top: 0;
@@ -51,4 +158,10 @@ img#style {
 #review {
 	display: table;
 	margin: 0px;
+}
+
+#beforeSelfie,
+#deepSelfie {
+    padding-top: 15px;
+
 }

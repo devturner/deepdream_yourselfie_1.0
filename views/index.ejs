@@ -1,45 +1,48 @@
-<!DOCTYPE	html>
+<!DOCTYPE html>
 
 <head>
 	
 	<meta charset="utf-8">
 	<title>deep dream yourselfie</title>
-
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="assets/css/styles.css">
 
 </head>
 <body>
-	<h2>deep dream yourselfie</h2>
+	<div id="header">
+			<h1>deep dream yourselfie</h1>
+	</div>
 
 <div class="container">
-	
 	<div class="photobooth">
-		<button id="start" onclick="handlers.startCamera()">Enable Camera</button>
-		<button id="stop" style="display: none;" onclick="handlers.stopCamera()">Disable Camera</button>
+
+		<center><a href="#" id="start" class="visible" onclick="handlers.startCamera()">enable camera</a></center>
+
+		<!-- <button id="start" onclick="handlers.startCamera()"><i class="material-icons">power_settings_new </i></button> -->
+		<!-- <button id="stop" style="display: none;" onclick="handlers.stopCamera()">disable camera</button> -->
 		<center><video id="camera-stream" style="display: none;" width="640" height="480" autoplay></video></center>
 			<img id="selfie" style="display: none;">
 			
-		<div id="controles">
+		<div class="controles">
+			<form method="POST" action="/results">
+	  			<input type= "hidden" id="taken_selfie" name="taken_selfie">
+				<button type="submit" id="submit" formmethod="post" style="display: none;">submit</button>
+			</form>
+
 			<button id="deletePhoto" style="display: none;" onclick="selfie.retakeSelfie()">retake</button>
-			<button id="takePhoto" style="display: none;" onclick="selfie.takeSelfie()">take</button>
+			<center><button id="takePhoto" style="display: none;" onclick="selfie.takeSelfie()">selfie</button></center>
 			<!-- <button id="submitPhoto" style="display: none;" onclick="selfie.submitSelfie()">submit</button> -->
-		</div>
-
-
-		<form method="POST" action="/">
-  			<input type= "hidden" id="taken_selfie" name="taken_selfie">
-		    <input type="submit" id="submit" style="display: none;">
-		</form>
+		
+			
 		</div>
 		<canvas id="canvas"></canvas>
 	</div>
-
-
-
-
 </div>
+
+
 <script type="text/javascript" src="app/client.js" async></script>
 <!-- <script type="text/javascript" src="index.js" async></script> -->
-
 
 </body>

@@ -9,7 +9,8 @@ var app = express();
 //view engine
 
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, '/views'))
+// app.set('views', path.join(__dirname, '/views'));
+
 
 app.use(bodyParser.json({limit: '5mb'}));
 app.use(bodyParser.urlencoded({limit: '5mb', extended: true}));
@@ -17,13 +18,13 @@ app.use(bodyParser.urlencoded({limit: '5mb', extended: true}));
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static('public'));
 
-// http://expressjs.com/en/starter/basic-routing.html
-app.get('*', function(request, response) {
+
+app.get('/', function(request, response) {
   response.render('index', {result: ''});
 });
 
 
-app.post('/', function(request, response){
+app.post('/results', function(request, response){
 	var selfie = request.body.taken_selfie;
 	var data_url = "data:image/jpg;base64" + selfie;
   
@@ -48,6 +49,7 @@ app.post('/', function(request, response){
       var reply = JSON.parse(body);
       var redirect = reply.output_url;
       var str = '<img id="deepSelfie" src="' + redirect + '">';
+      console.log(str);
       response.render('results', {result: str});
     });
   })
