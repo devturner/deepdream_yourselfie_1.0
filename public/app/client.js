@@ -42,7 +42,6 @@ var videoView = {
         localstream = stream;
         // show buttons on taking, retaking, and submitting (hide before using webcam)
         hideUi.toggleButton('start');
-        hideUi.toggleButton('stop');
         hideUi.toggleButton('takePhoto');
         hideUi.toggleVideo();
 
@@ -58,7 +57,6 @@ var videoView = {
     localstream.getTracks()[0].stop();
     // hide buttons on taking, retaking, and submitting
 
-    hideUi.toggleButton('stop');
     hideUi.toggleButton('start');
     hideUi.toggleButton('submit');
     hideUi.cameraOff();
@@ -89,8 +87,9 @@ var handlers = {
   setupEventListeners: function () {
     document.addEventListener('click', function(event) {
       var elementClicked = event.target;
-
+      console.log('here');
       if(elementClicked.id === 'submit') {
+        console.log('here 2');
         handlers.fillSubmitForm();
         selfie.submitSelfie();
       }
