@@ -15,7 +15,7 @@
     "body-parser": "*",
     "ejs": "^2.6.1",
     "express": "^4.16.3",
-    "http-delayed-response": "0.0.4",
+    "jimp": "^0.2.28",
     "request": "^2.87.0"
   },
   "repository": {

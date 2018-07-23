@@ -87,9 +87,7 @@ var handlers = {
   setupEventListeners: function () {
     document.addEventListener('click', function(event) {
       var elementClicked = event.target;
-      console.log('here');
       if(elementClicked.id === 'submit') {
-        console.log('here 2');
         handlers.fillSubmitForm();
         selfie.submitSelfie();
       }
@@ -118,7 +116,7 @@ var handlers = {
       context.drawImage(video, 0, 0, width, height)
       
       // canvas image to dataURL for image source
-      return hidden_canvas.toDataURL('image/jpg');
+      return hidden_canvas.toDataURL("image/jpeg", 0.7);
     }
   },
 
