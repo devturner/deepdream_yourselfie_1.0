@@ -69,9 +69,6 @@ const extendTimeoutMiddleware = (req, res, next) => {
   next();
 };
 
-app.use(extendTimeoutMiddleware);
-
-
 
 var port = process.env.PORT || 8080;
 
@@ -87,7 +84,7 @@ app.post('/results', function(request, response){
   ba64.writeImage("myimage", data_url, function(err){
   	if (err) throw err;
 	  console.log("Image saved successfully");
-  
+    app.use(extendTimeoutMiddleware);
     var request = require("request");
     request.post({
       url: 'https://api.deepai.org/api/deepdream',
