@@ -61,7 +61,7 @@ app.post('/results', function(request, response){
 
 app.use(function (req, res) {
   var delayed = new DelayedResponse(req, res);
-  slowFunction(delayed.wait());
+  app.post(delayed.wait());
 });
 
 
