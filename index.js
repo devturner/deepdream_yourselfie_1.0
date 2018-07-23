@@ -18,6 +18,7 @@ app.use(bodyParser.urlencoded({limit: '5mb', extended: true}));
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static('public'));
 
+var port = process.env.PORT || 8080;
 
 app.get('/', function(request, response) {
   response.render('index', {result: ''});
@@ -57,6 +58,6 @@ app.post('/results', function(request, response){
 
 
 // listen for requests :)
-app.listen(8080, function () {
+app.listen(port, function () {
   console.log('Your app is listening on port 8080...');
 });
