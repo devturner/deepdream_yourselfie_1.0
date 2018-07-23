@@ -9,25 +9,14 @@ var app = express();
 //view engine
 
 app.set('view engine', 'ejs');
-// app.set('views', path.join(__dirname, '/views'));
-
 
 app.use(bodyParser.json({limit: '5mb'}));
 app.use(bodyParser.urlencoded({limit: '5mb', extended: true}));
 
-// http://expressjs.com/en/starter/static-files.html
 app.use(express.static('public'));
 
-var port = process.env.PORT || 8080;
 
-app.get('/', function(request, response) {
-  response.render('index', {result: ''});
-});
-
-
-
-
-
+// keep alive
 const extendTimeoutMiddleware = (req, res, next) => {
   const space = ' ';
   let isFinished = false;
@@ -84,7 +73,11 @@ app.use(extendTimeoutMiddleware);
 
 
 
+var port = process.env.PORT || 8080;
 
+app.get('/', function(request, response) {
+  response.render('index', {result: ''});
+});
 
 
 app.post('/results', function(request, response){
