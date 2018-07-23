@@ -19,6 +19,64 @@ app.use(express.static('public'));
 // keep alive
 
 
+const extendTimeoutMiddleware = (request, response, next) => {
+  const space = ' ';
+  let isFinished = false;
+  let isDataSent = false;
+  console.log(request.url)
+  // Only extend the timeout for API requests
+  if (!request.url.includes('/results')) {
+    next();
+    return;
+  }
+
+  response.once('finish', () => {
+    isFinished = true;
+  });
+
+  response.once('end', () => {
+    isFinished = true;
+  });
+
+  response.once('close', () => {
+    isFinished = true;
+  });
+
+  response.on('data', (data) => {
+    // Look for something other than our blank space to indicate that real
+    // data is now being sent back to the client.
+    if (data !== space) {
+      isDataSent = true;
+    }
+  });
+
+  const waitAndSend = () => {
+    setTimeout(() => {
+      console.log('this happened')
+      // If the response hasn't finished and hasn't sent any data back....
+      if (!isFinished && !isDataSent) {
+        // Need to write the status code/headers if they haven't been sent yet.
+        if (!response.headersSent) {
+          response.writeHead(202);
+        }
+
+        response.write(space);
+
+        // Wait another 15 seconds
+        waitAndSend();
+      }
+    }, 28000);
+  };
+
+  waitAndSend();
+  next();
+};
+
+
+
+app.use(extendTimeoutMiddleware);
+
+
 
 var port = process.env.PORT || 8080;
 
@@ -36,6 +94,7 @@ app.post('/results', function(request, response){
 	  console.log("Image saved successfully");
   
     var request = require("request");
+    
     request.post({
       url: 'https://api.deepai.org/api/deepdream',
       headers: {
@@ -55,14 +114,10 @@ app.post('/results', function(request, response){
       console.log(str);
       response.render('results', {result: str});
     });
-  })
+  }); 
 });
 
 
-app.use(function (req, res) {
-  var delayed = new DelayedResponse(req, res);
-  app.post(delayed.wait());
-});
 
 
 // listen for requests :)
