@@ -14,14 +14,10 @@
 	<div id="header">
 			<h1>deep dream yourselfie</h1>
 	</div>
-
 <div class="container">
 	<div class="photobooth">
-
+		<div id="loader" style="display: none;"></div>
 		<center><a href="#" id="start" class="visible" onclick="handlers.startCamera()">enable camera</a></center>
-
-		<!-- <button id="start" onclick="handlers.startCamera()"><i class="material-icons">power_settings_new </i></button> -->
-		<!-- <button id="stop" style="display: none;" onclick="handlers.stopCamera()">disable camera</button> -->
 		<center><video id="camera-stream" style="display: none;" width="512" height="384" autoplay></video></center>
 			<img id="selfie" style="display: none;">
 			
@@ -33,13 +29,11 @@
 
 			<button id="deletePhoto" style="display: none;" onclick="selfie.retakeSelfie()">retake</button>
 			<center><button id="takePhoto" style="display: none;" onclick="selfie.takeSelfie()">selfie</button></center>
-			<!-- <button id="submitPhoto" style="display: none;" onclick="selfie.submitSelfie()">submit</button> -->
-		
-			
 		</div>
 		<canvas id="canvas"></canvas>
 	</div>
 </div>
+
 
 
 <script type="text/javascript" src="app/client.js" async></script>
