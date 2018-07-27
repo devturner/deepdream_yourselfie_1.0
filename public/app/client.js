@@ -76,7 +76,7 @@ var videoView = {
 var handlers = {
   // turn on the webcam
   startCamera: function() {
-    videoView.startVideo() 
+    videoView.startVideo();
   },
   // turn off the webcam
   stopCamera: function() {
@@ -88,6 +88,7 @@ var handlers = {
     document.addEventListener('click', function(event) {
       var elementClicked = event.target;
       if(elementClicked.id === 'submit') {
+        hideUi.toggleSpinner();
         handlers.fillSubmitForm();
         selfie.submitSelfie();
       }
@@ -151,7 +152,11 @@ var hideUi = {
     } else {
         x.style.display = 'none';
     }
-  }, 
+  },
+  toggleSpinner: function() {
+    var x = document.getElementById('loader')
+    x.style.display = 'block';
+  }
 }
 
 handlers.setupEventListeners();
